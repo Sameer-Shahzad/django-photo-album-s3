@@ -14,49 +14,29 @@
                 <div class="border rounded-lg bg-white shadow-sm p-4">
                     <h2 class="text-lg font-semibold mb-3">Categories</h2>
                     <ul class="space-y-2">
+                        
                         <li><a href="#" class="block px-3 py-2 rounded hover:bg-gray-100">All</a></li>
-                        <li><a href="#" class="block px-3 py-2 rounded hover:bg-gray-100">Cras justo odio</a></li>
-                        <li><a href="#" class="block px-3 py-2 rounded hover:bg-gray-100">Dapibus ac facilisis in</a></li>
-                        <li><a href="#" class="block px-3 py-2 rounded hover:bg-gray-100">Vestibulum at eros</a></li>
+                        {% for category in categories %}
+                        <li><a href="#" class="block px-3 py-2 rounded hover:bg-gray-100">{{ category.name }}</a></li>
+                        {% endfor %}
                         <li class="flex justify-center pt-5"> <a href="{% url 'add' %}" class="text-black bg-pink-300 p-2 rounded-md">Add Photo</a></li>
+                        
                     </ul>
                 </div>
             </div>
 
             <!-- Cards -->
-            <div class="col-span-3 grid grid-cols-3 gap-6">
-        
-                <div class="border rounded-lg bg-white shadow-md overflow-hidden">
-                <img src="https://picsum.photos/300/200" alt="Sample" class="w-full h-40 object-cover p-3">
-                <div class="p-4">
-                    <p class="text-sm text-gray-600 mb-2">Category: Pets</p>
-                    <a href="" class="block w-full text-center border border-gray-400 text-gray-700 py-2 rounded hover:bg-gray-100">View</a>
-                </div>
-                </div>
+            <div class="col-span-3 grid grid-cols-3 gap-6 h-auto">
 
+                {% for photo in photos %}
                 <div class="border rounded-lg bg-white shadow-md overflow-hidden">
-                <img src="https://picsum.photos/300/200" alt="Sample" class="w-full h-40 object-cover p-3">
+                <img src="{{photo.image.url}}" alt="Sample" class="w-full h-60 object-contain p-3">
                 <div class="p-4">
-                    <p class="text-sm text-gray-600 mb-2">Category: Pets</p>
-                    <a href="#" class="block w-full text-center border border-gray-400 text-gray-700 py-2 rounded hover:bg-gray-100">View</a>
+                    <p class="text-sm text-gray-600 mb-2">Category: {{ photo.category.name }}</p>
+                    <a href="{% url 'photo' photo.id %}" class="block w-full text-center border border-gray-400 text-gray-700 py-2 rounded hover:bg-gray-100">View</a>
                 </div>
                 </div>
-
-                <div class="border rounded-lg bg-white shadow-md overflow-hidden">
-                <img src="https://picsum.photos/300/200" alt="Sample" class="w-full h-40 object-cover p-3">
-                <div class="p-4">
-                    <p class="text-sm text-gray-600 mb-2">Category: Pets</p>
-                    <a href="#" class="block w-full text-center border border-gray-400 text-gray-700 py-2 rounded hover:bg-gray-100">View</a>
-                </div>
-                </div>
-
-                <div class="border rounded-lg bg-white shadow-md overflow-hidden">
-                <img src="https://picsum.photos/300/200" alt="Sample" class="w-full h-40 object-cover p-3">
-                <div class="p-4">
-                    <p class="text-sm text-gray-600 mb-2">Category: Pets</p>
-                    <a href="#" class="block w-full text-center border border-gray-400 text-gray-700 py-2 rounded hover:bg-gray-100">View</a>
-                </div>
-                </div>
+                {% endfor %}
 
             </div>
         </div>
