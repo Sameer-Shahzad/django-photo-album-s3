@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from .models import Category, Photo
+from .forms import PhotoForm
 
 # Create your views here.
 
@@ -14,5 +15,13 @@ def viewPhoto (request, pk):
     return render (request, 'photos/photo.html', {'photos': photos})
 
 def addPhoto (request):
-    return render (request, 'photos/add.html')
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/gallery/')
+        return render(request, 'photos/add.html', {'form': form})
+    else:
+        form = PhotoForm()
+        return render (request, 'photos/add.html', {'form': form})
 
