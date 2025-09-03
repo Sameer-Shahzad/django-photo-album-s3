@@ -8,56 +8,35 @@
 </head>
 <body>
 
-    <div class=" w-full bg-gray-200 h-16 p-5">
-    <a class="text-white bg-black p-3 rounded" href="{% url 'gallery' %}">Go Back</a>
+    <div class="w-full bg-gray-200 h-16 p-5">
+        <a class="text-white bg-black p-3 rounded" href="{% url 'gallery' %}">Go Back</a>
     </div>
-<form method="POST" enctype="multipart/form-data">
+    
+   <form method="POST" enctype="multipart/form-data" class="mx-4 mt-10">
     {% csrf_token %}
 
-    <div class="mb-4 mx-4 mt-10">
-        <label class="block text-gray-700 font-bold mb-2" for="{{ form.description.id_for_label }}">
-            {{ form.description.label }}
-        </label>
-        <input required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300" id="{{ form.description.id_for_label }}" 
-            type="text" placeholder="Enter a description" id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" value="{{ form.description.value|default:'' }}">
+    <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Description</label>
+        {{ form.description }}
     </div>
 
-    <div class="mb-4 mx-4">
-        <label class="block text-gray-700 font-bold mb-2" for="{{ form.category.id_for_label }}">
-            {{ form.category.label }}
-        </label>
-        <select required class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300" 
-                id="{{ form.category.id_for_label }}" 
-                name="{{ form.category.name }}">
-            {% for value, text in form.category.field.choices %}
-                <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>
-                    {{ text }}
-                </option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="mb-4 mx-4">
-        <label class="block text-gray-700 font-bold mb-2" for="{{ form.category.id_for_label }}">
-            Create a new category
-        </label>
-        <input placeholder="Enter a new Category" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300" 
-                id="{{ form.category.id_for_label }}" 
-                name="{{ form.category.name }}">
-    </input>
+    <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Select a category</label>
+        {{ form.category }}
     </div>
 
-    <div class="mb-6 mx-4">
-        <label class="block text-gray-700 font-bold mb-2" for="{{ form.image.id_for_label }}">
-            {{ form.image.label }}
-        </label>
-        <input required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300" 
-            id="{{ form.image.id_for_label }}" 
-            type="file" 
-            name="{{ form.image.name }}">
+    <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Create a new category</label>
+        {{ category_form.name }}
     </div>
 
-    <div class="mt-4 mx-4">
-        <button class="text-white bg-black p-2 rounded hover:bg-gray-800 transition duration-300" 
+    <div class="mb-6">
+        <label class="block text-gray-700 font-bold mb-2">Upload an image</label>
+        {{ form.image }}
+    </div>
+
+    <div class="mt-4">
+        <button class="text-white bg-blue-500 hover:bg-blue-700 p-2 rounded transition duration-300" 
             type="submit">Submit</button>
     </div>
 </form>

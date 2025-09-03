@@ -30,7 +30,13 @@
 
                 {% for photo in photos %}
                 <div class="border rounded-lg bg-white shadow-md overflow-hidden">
-                <img src="{{photo.image.url}}" alt="Sample" class="w-full h-60 object-contain p-3">
+                {% if photo.image %}
+                <img src="{{ photo.image.url }}" alt="Sample" class="w-full h-60 object-contain p-3">
+                {% else %}
+                    <div class="w-full h-60 flex items-center justify-center bg-gray-100 text-gray-400">
+                        No Image Available
+                    </div>
+                {% endif %}
                 <div class="p-4">
                     <p class="text-sm text-gray-600 mb-2">Category: {{ photo.category.name }}</p>
                     <a href="{% url 'photo' photo.id %}" class="block w-full text-center border border-gray-400 text-gray-700 py-2 rounded hover:bg-gray-100">View</a>
