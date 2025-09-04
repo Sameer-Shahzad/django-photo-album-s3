@@ -15,9 +15,9 @@
                     <h2 class="text-lg font-semibold mb-3">Categories</h2>
                     <ul class="space-y-2">
                         
-                        <li><a href="#" class="block px-3 py-2 rounded hover:bg-gray-100">All</a></li>
+                        <li><a href="{% url 'gallery' %}" class="block px-3 py-2 rounded hover:bg-gray-100">All</a></li>
                         {% for category in categories %}
-                        <li><a href="#" class="block px-3 py-2 rounded hover:bg-gray-100">{{ category.name }}</a></li>
+                        <li><a href="{% url 'gallery' %}?category={{category.name}}" class="block px-3 py-2 rounded hover:bg-gray-100">{{ category.name }}</a></li>
                         {% endfor %}
                         <li class="flex justify-center pt-1"> <a href="{% url 'add' %}" class="text-black bg-black text-white p-2 rounded-md">Add Photo</a></li>
                         
